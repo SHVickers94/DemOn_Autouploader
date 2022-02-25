@@ -49,3 +49,20 @@ Open a port for RSelenium:
 ```sudo docker run -d -p 4445:4444 selenium/standalone-firefox```
 
 Run the R code in ```DemOn_Autouploader.R```.
+
+## Troubleshooting
+
+#### BTO_webpage() is returning Error in .self$value[[1]] : subscript out of bounds 
+
+Go into ```Docker``` and stop the running container and then delete it. Then start from fresh in the Terminal tab of ```Rstudio``` with:
+```sudo docker pull selenium/standalone-firefox```
+
+And then run:
+```sudo docker run -d -p 4445:4444 selenium/standalone-firefox```
+
+Now go back into ```DemOn_Autouploader.R``` and run the script.
+
+
+#### I want data entry columns that aren't included in the data templates
+
+Gett in contact with me and I can get these lesser used data entry columns added for you into the template.
