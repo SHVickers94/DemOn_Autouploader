@@ -52,6 +52,10 @@ Run the R code in ```DemOn_Autouploader.R```.
 
 ## Troubleshooting
 
+### This is all way too complicated for me
+
+This is a (hopefully) short-term solution to the lack of batch upload on DemOn. Eventually this process will be obsolete. Until then, the following video may help walk you through the process:
+
 ### - BTO_webpage() is returning Error in .self$value[[1]] : subscript out of bounds 
 
 Go into ```Docker``` and stop the running container and then delete it. Then start from fresh in the Terminal tab of ```Rstudio``` with:
@@ -61,6 +65,10 @@ And then run:
 ```sudo docker run -d -p 4445:4444 selenium/standalone-firefox```
 
 Now go back into ```DemOn_Autouploader.R``` and run the script.
+
+### - remDr$open() is returning 'Error in checkError(res) :Undefined error in httr call. httr output: Failed to connect to localhost port 4445: Connection refused'
+
+Setup of ```Docker``` has failed. The best solution to this I have found is to remove the current container on Docker and obtain a new one by running ```sudo docker run -d -p 4445:4444 selenium/standalone-firefox``` in the Terminal. Then re-run ```DemOn_Autouploader.R```.
 
 ### - I want data entry columns that aren't included in the data templates
 
