@@ -52,7 +52,7 @@ Run the R code in ```DemOn_Autouploader.R```.
 
 ## Troubleshooting
 
-### This is all way too complicated for me
+### - This is all way too complicated for me
 
 This is a (hopefully) short-term solution to the lack of batch upload on DemOn. Eventually this process will be obsolete. Until then, the following video may help walk you through the process:
 
