@@ -52,7 +52,7 @@ Run the R code in ```DemOn_Autouploader.R```.
 
 ## Troubleshooting
 
-### BTO_webpage() is returning Error in .self$value[[1]] : subscript out of bounds 
+### - BTO_webpage() is returning Error in .self$value[[1]] : subscript out of bounds 
 
 Go into ```Docker``` and stop the running container and then delete it. Then start from fresh in the Terminal tab of ```Rstudio``` with:
 ```sudo docker pull selenium/standalone-firefox```
@@ -62,7 +62,10 @@ And then run:
 
 Now go back into ```DemOn_Autouploader.R``` and run the script.
 
+### - I want data entry columns that aren't included in the data templates
 
-### I want data entry columns that aren't included in the data templates
+Get in contact with me and I can get these lesser used data entry columns added for you into the template.
 
-Gett in contact with me and I can get these lesser used data entry columns added for you into the template.
+### - None of my submitted records are appearing on DemOn
+
+The most likely causes for this are missing required data that DemOn needs to submit, your data throwing warning or error messages in DemOn (e.g. a wing length otuside of what is expected), and faulty formatting of date or time data across your dataset. Make sure to double check your data and follow the template document formats precisely.
