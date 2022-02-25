@@ -56,7 +56,7 @@ Run the R code in ```DemOn_Autouploader.R```.
 
 This is a (hopefully) short-term solution to the lack of batch upload on DemOn. Eventually this process will be obsolete. Until then, the following video may help walk you through the process:
 
-### - BTO_webpage() is returning Error in .self$value[[1]] : subscript out of bounds 
+### - BTO_webpage() is returning 'Error in .self$value[[1]] : subscript out of bounds'
 
 Go into ```Docker``` and stop the running container and then delete it. Then start from fresh in the Terminal tab of ```Rstudio``` with:
 ```sudo docker pull selenium/standalone-firefox```
