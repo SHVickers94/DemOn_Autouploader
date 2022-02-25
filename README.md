@@ -18,7 +18,7 @@ Once all are installed on your system, make sure Docker is open and running. You
 
 Download the folder of files here onto your system - click the green ```Code``` drop down menu then select ```Download ZIP```. Then unzip this folder.
 
-Open up ```RStudio``` (you never have to open R itself but needs to be installed) and then open up the ```BTO_Auto_Upload.R``` file into RStudio (file -> Open File...). Then set your working directory to the folder you downloaded from GitHub (Session -> Set Working Directory -> Choose Directory...)
+Open up ```RStudio``` (you never have to open R itself but needs to be installed) and then open up the ```DemOn_Autouploader.R``` file into RStudio (file -> Open File...). Then set your working directory to the folder you downloaded from GitHub (Session -> Set Working Directory -> Choose Directory...)
 
 In the bottom left of ```RStudio``` go to the ```Terminal``` tab. In the terminal run the following (it will ask you for a password, when you type it in nothing will appear in the terminal but this is expected - it is just hidden. Enter your computer password and hit enter.):
 
@@ -36,9 +36,9 @@ NOTE: Data needs to be in a strict format - see attached csv files. Formatting o
 
 Make sure you have ```Docker``` up and running.
 
-Open up ```RStudio```, set your working directory to the folder containing the ```BTO_data_upload_functions.R``` file. 
+Open up ```RStudio```, set your working directory to the folder containing the ```DemOn_Autouploader_functions.R``` file. 
 
-Open up the ```DemOn Autouploader.R``` file. 
+Open up the ```DemOn_Autouploader.R``` file. 
 
 In RStudio run the following code in the Terminal (if Docker is still running from a previous run of the Auto uploader then you don't need to re-run these terminal commands):
 
@@ -48,4 +48,4 @@ To get latest version of Firefox into docker:
 Open a port for RSelenium:
 ```sudo docker run -d -p 4445:4444 selenium/standalone-firefox```
 
-Run the R code in ```DemOn Autouploader.R```.
+Run the R code in ```DemOn_Autouploader.R```.
