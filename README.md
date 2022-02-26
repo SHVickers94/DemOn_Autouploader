@@ -70,6 +70,10 @@ Now go back into ```DemOn_Autouploader.R``` and run the script.
 
 Setup of ```Docker``` has failed. The best solution to this I have found is to remove the current container on Docker and obtain a new one by running ```sudo docker run -d -p 4445:4444 selenium/standalone-firefox``` in the Terminal. Then re-run ```DemOn_Autouploader.R```.
 
+### - remDr$open() is returning 'Error in checkError(res) : Undefined error in httr call. httr output: Empty reply from server'
+
+This tends to happen to me when my connection has timed out overnight or between sesssions. Starting a new container on ```Docker``` and running the ```Terminal``` commands doesn't seem to fix the issue. In this scenario I restart ```RStudio```, delete the current container on ```Docker```, and start fresh.
+
 ### - I want data entry columns that aren't included in the data templates
 
 Get in contact with me and I can get these lesser used data entry columns added for you into the template.
