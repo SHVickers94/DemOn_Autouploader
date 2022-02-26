@@ -40,7 +40,7 @@ BTO_ringing_upload(BTO_data, rowStart = 1, display=T)
 
 # To upload sightings use:
 # Please note: only record type F works here
-BTO_sightings_upload(BTO_data, rowStart = 966, display=T)
+BTO_sightings_upload(BTO_data, rowStart = 1, display=T)
 
 
 # On large data entry submissions, Docker and your connection may drop or time out and you will get an error here. If that happens, re-establish your connection and re-start your submission from the point it failed - to do this set 'startRow = ' to the record number that failed. Records up to that point should be on DemOn.
