@@ -52,10 +52,14 @@ BTO_sightings_upload(BTO_data, rowStart = 1, display=T)
 ## import saved file (whatever you've called it)
 imported <- read.csv(file.choose())
 
+# Ensure dates are formatted identically. Previous issue here with 01/1/2022 not matching 01/01/2022
+original <- BTO_data
+original$Visit_Date <- as.POSIXct(original$Visit_Date, format='%d/%m/%y')
+imported$visit_date <- as.POSIXct(imported$visit_date, format='%d/%m/%y')
+
 ## list of not-imported records
 imported_list <- with(imported, paste(ring_no, visit_date, capture_time))
-BTO_data_list <- with(BTO_data, paste(Ring_No, Visit_Date, Capture_Time))
-
+BTO_data_list <- with(original, paste(Ring_No, Visit_Date, Capture_Time))
 
 ## dataframe of not-imported records
 BTO_data2 <- BTO_data[!BTO_data_list %in% imported_list,]
