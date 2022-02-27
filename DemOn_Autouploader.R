@@ -4,7 +4,7 @@
 
 rm(list=ls()) # clear the environment
 
-# Instal RSeleniumk if you don't have it, otherwise just load library
+# Instal RSelenium if you don't have it, otherwise just load library
 if(!require('RSelenium'))install.packages('RSelenium');library(RSelenium)
 
 # Set working directory for where R code and data are. Can be done in code or by Session menu at top
@@ -13,7 +13,7 @@ if(!require('RSelenium'))install.packages('RSelenium');library(RSelenium)
 # Import data to upload
 BTO_data <- read.csv(file.choose()) # upload your .csv file of data to be uploaded
 nrow(BTO_data) # check dataset is as expected
-head(BTO_data)
+head(BTO_data) # print top 6 rows of data
 
 # Import functions to interact with BTO webpage 
 source("DemOn_Autouploader_functions.R")
@@ -31,8 +31,10 @@ BTO_login(username = '...', password = '...')
 # Navigate to ringing entry page (will take a few seconds). An image will appear in bottom right
 BTO_ringing_page()
 
-# Start upload of all data - counter of records submitted will tcik, up but thsis DOES NOT mean those records have been successfully uplaoded. By default an image will appear after each record is submitted. Hopefully you will see 'Record Saved!', but you may see warning or error messages in DemOn where they require comments - these records will not be submitted and will be skipped. You need to correct data mistakes and re-submit records here, or enter these manually on DemOn.
-# If you don't want thes eimages appearing for each record, set 'display=F'
+# Start upload of all data - counter of records submitted will tick, up but this DOES NOT mean those records have been successfully uplaoded. 
+# By default an image will appear after each record is submitted. Hopefully you will see 'Record Saved!', but you may see warning or error messages in DemOn where they require comments - these records will not be submitted and will be skipped. 
+# You need to correct data mistakes and re-submit records here, or enter these manually on DemOn.
+# If you don't want screenshot images appearing for each record, set 'display=F'
 
 # To upload ringing and retrap records (record type N or S) use:
 # Please note: entry of records that are not record type N or S are NOT supported here
@@ -43,13 +45,15 @@ BTO_ringing_upload(BTO_data, rowStart = 1, display=T)
 BTO_sightings_upload(BTO_data, rowStart = 1, display=T)
 
 
-# On large data entry submissions, Docker and your connection may drop or time out and you will get an error here. If that happens, re-establish your connection and re-start your submission from the point it failed - to do this set 'startRow = ' to the record number that failed. Records up to that point should be on DemOn.
+# On large data entry submissions, Docker and your connection may drop or time out and you will get an error here. 
+# If that happens, re-establish your connection and re-start your submission from the point it failed - to do this set 'startRow = ' to the record number that failed. 
+# Records up to that point should be on DemOn.
 
 
 # Check whether what has been imported matches the records we tried to import
-### Manually log into website, go to 'Explore Data' Menu, chose 'Ringing', then search for the period of ringing, and then select to export all data. This will save a csv to the downloads folder
+# Manually log into website, go to 'Explore Data' Menu, chose 'Ringing', then search for the period of ringing, and then select to export all data. This will save a csv to the downloads folder
 
-## import saved file (whatever you've called it)
+# Import saved file (whatever you've called it)
 imported <- read.csv(file.choose())
 
 # Ensure dates are formatted identically. Previous issue here with 01/1/2022 not matching 01/01/2022
@@ -57,23 +61,23 @@ original <- BTO_data
 original$Visit_Date <- as.POSIXct(original$Visit_Date, format='%d/%m/%y')
 imported$visit_date <- as.POSIXct(imported$visit_date, format='%d/%m/%y')
 
-## list of not-imported records
+# Create list of records
 imported_list <- with(imported, paste(ring_no, visit_date, capture_time))
 BTO_data_list <- with(original, paste(Ring_No, Visit_Date, Capture_Time))
 
-## dataframe of not-imported records
+# Create dataframe of not-imported records
 BTO_data2 <- BTO_data[!BTO_data_list %in% imported_list,]
 paste(BTO_data[!BTO_data_list %in% imported_list, "Ring_No"],collapse=",")
 nrow(BTO_data2)
 
-## check still logged on. - otherwise use functions above to log back in
+# Check you are still logged on - otherwise use functions above to log back in
 remDr$screenshot(display = TRUE)
 
-## upload missing records
+# Upload missing records
 BTO_ringing_upload(BTO_data2, rowStart = 1, display=T)
 
 BTO_sightings_upload(BTO_data2, rowStart = 1, display=T)
 
 remDr$screenshot(display = TRUE)
 
-## repeat this process until all are uploaded!!!!
+# You may need to repeat this process a few times until all records are uploaded
