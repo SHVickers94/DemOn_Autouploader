@@ -9,7 +9,7 @@ Whilst this method requires significant set-up, once the system is in place data
 
 ## Getting started instructions
 
-A video guide to using the system can be found here: https://youtu.be/13h8-Dsd_34. Please also read this document.
+A video guide to using the system can be found here: https://youtu.be/xbWlgE5vwv8. Please also read this document.
 
 You will need a few programs installed:
 1. R (https://www.r-project.org/)
@@ -56,7 +56,7 @@ Run the R code in ```DemOn_Autouploader.R```.
 
 ### - This is all way too complicated for me
 
-This is a (hopefully) short-term solution to the lack of batch upload on DemOn. Eventually this process will be obsolete. Until then, the following video may help walk you through the process: https://youtu.be/13h8-Dsd_34
+This is a (hopefully) short-term solution to the lack of batch upload on DemOn. Eventually this process will be obsolete. Until then, the following video may help walk you through the process: https://youtu.be/xbWlgE5vwv8
 
 ### - BTO_webpage() is returning 'Error in .self$value[[1]] : subscript out of bounds'
 
