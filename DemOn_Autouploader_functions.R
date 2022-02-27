@@ -29,6 +29,7 @@ BTO_ringing_page <- function(){
   
   Sys.sleep(2)
   
+  # Set ringing data entry form to export option by first clickign setting button then selecting from dropdown menu.
   Settings  <- remDr$findElement(using = 'css selector', ".col-md-1 .pull-right")
   Settings$clickElement()
   Field_Setup  <- remDr$findElement(using = 'css selector', ".col-sm-8:nth-child(2) .form-control option[value='2675']")
@@ -36,6 +37,7 @@ BTO_ringing_page <- function(){
   
   Sys.sleep(1)
   
+  # Go back to BTO webpage and re-enter ringing entry page (this fixes bugs with field names caused by changing field entry setup)
   BTO_webpage()
   ringing_button <- remDr$findElement(using = 'css selector', ".buttonReportRate")
   ringing_button$clickElement()
@@ -205,6 +207,7 @@ BTO_sightings_upload <- function(data, rowStart=1, display=TRUE){
     remDr$refresh()
     Sys.sleep(3)
     
+    # R changes F to FALSE on upload of data so we change record type to 'F'
     data$Record_Type <- 'F'
 
     # define box and enter data into it
