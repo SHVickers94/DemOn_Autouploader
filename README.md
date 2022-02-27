@@ -83,3 +83,7 @@ Get in contact with me and I can get these lesser used data entry columns added 
 ### - None of my submitted records are appearing on DemOn
 
 The most likely causes for this are missing required data that DemOn needs to submit, your data throwing warning or error messages in DemOn (e.g. a wing length otuside of what is expected), and faulty formatting of date or time data across your dataset. Make sure to double check your data and follow the template document formats precisely.
+
+### - I'm using a PC (rather than a Mac) and I can't get this to work
+
+I developed my code on a Mac, as did Joel. This code is untested on PC and may be a platofrm specific issue. Get in touch and I can try to fix it.
