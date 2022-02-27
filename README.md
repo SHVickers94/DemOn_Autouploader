@@ -9,6 +9,8 @@ Whilst this method requires significant set-up, once the system is in place data
 
 ## Getting started instructions
 
+A video guide to using the system can be found here: https://youtu.be/vyjPWQNSnkQ. Please also read this document.
+
 You will need a few programs installed:
 1. R (https://www.r-project.org/)
 2. RStudio (https://www.rstudio.com/products/rstudio/download/#download)
@@ -40,7 +42,7 @@ Open up ```RStudio```, set your working directory to the folder containing the `
 
 Open up the ```DemOn_Autouploader.R``` file. 
 
-In RStudio run the following code in the Terminal (if Docker is still running from a previous run of the Auto uploader then you don't need to re-run these terminal commands):
+In RStudio run the following code in the Terminal:
 
 To get latest version of Firefox into docker:
 ```sudo docker pull selenium/standalone-firefox```
@@ -54,7 +56,7 @@ Run the R code in ```DemOn_Autouploader.R```.
 
 ### - This is all way too complicated for me
 
-This is a (hopefully) short-term solution to the lack of batch upload on DemOn. Eventually this process will be obsolete. Until then, the following video may help walk you through the process:
+This is a (hopefully) short-term solution to the lack of batch upload on DemOn. Eventually this process will be obsolete. Until then, the following video may help walk you through the process: https://youtu.be/vyjPWQNSnkQ
 
 ### - BTO_webpage() is returning 'Error in .self$value[[1]] : subscript out of bounds'
 
