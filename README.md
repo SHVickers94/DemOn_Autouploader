@@ -9,12 +9,14 @@ Whilst this method requires significant set-up, once the system is in place data
 
 ## Getting started instructions
 
-A video guide to using the system can be found here: https://youtu.be/xbWlgE5vwv8. Please also read this document.
+A video guide to using the system for Mac users can be found here: https://youtu.be/xbWlgE5vwv8. Please also read this document.
 
 You will need a few programs installed:
 1. R (https://www.r-project.org/)
 2. RStudio (https://www.rstudio.com/products/rstudio/download/#download)
 3. Docker (https://www.docker.com/products/docker-desktop)
+
+Please note: ```Docker``` installation on Windows PC is more complex. Please follow this guide: https://docs.docker.com/desktop/windows/install/ and follow the instructions for ```WSL 2 backend```.
 
 Once all are installed on your system, make sure Docker is open and running. You will not have to do anything inside ```Docker``` itself.
 
@@ -22,7 +24,9 @@ Download the folder of files here onto your system - click the green ```Code``` 
 
 Open up ```RStudio``` (you never have to open ```R``` itself but it needs to be installed) and then open up the ```DemOn_Autouploader.R``` file into RStudio (file -> Open File...). Then set your working directory to the folder you downloaded from GitHub (Session -> Set Working Directory -> Choose Directory...)
 
-In the bottom left of ```RStudio``` go to the ```Terminal``` tab. In the terminal run the following (it will ask you for a password, when you type it in nothing will appear in the terminal but this is expected - it is just hidden. Enter your computer password and hit enter):
+In the bottom left of ```RStudio``` go to the ```Terminal``` tab. In the terminal run the following (it will ask you for a password, when you type it in nothing will appear in the terminal but this is expected - it is just hidden. Enter your system password and hit enter):
+
+Please note: Windows PC users do not need the 'sudo' prefix to these commands.
 
 1. To get latest version of Firefox into docker:
 ```sudo docker pull selenium/standalone-firefox```
@@ -43,6 +47,8 @@ NOTE: Data needs to be in a strict format - see attached csv files. Formatting o
 3. Open up the ```DemOn_Autouploader.R``` file. 
 
 4. In ```RStudio``` run the following code in the Terminal:
+
+Please note: Windows PC users do not need the 'sudo' prefix to these commands.
 
     To get latest version of Firefox into docker:
     ```sudo docker pull selenium/standalone-firefox```
