@@ -29,7 +29,6 @@ BTO_ringing_page <- function(){
   
   Sys.sleep(2)
   
-  # Set ringing data entry form to export option by first clickign setting button then selecting from dropdown menu.
   Settings  <- remDr$findElement(using = 'css selector', ".col-md-1 .pull-right")
   Settings$clickElement()
   Field_Setup  <- remDr$findElement(using = 'css selector', ".col-sm-8:nth-child(2) .form-control option[value='2675']")
@@ -37,7 +36,6 @@ BTO_ringing_page <- function(){
   
   Sys.sleep(1)
   
-  # Go back to BTO webpage and re-enter ringing entry page (this fixes bugs with field names caused by changing field entry setup)
   BTO_webpage()
   ringing_button <- remDr$findElement(using = 'css selector', ".buttonReportRate")
   ringing_button$clickElement()
@@ -45,6 +43,18 @@ BTO_ringing_page <- function(){
   # pause R 
   Sys.sleep(2)
   remDr$screenshot(display = TRUE)
+}
+
+BTO_complete <- function(){
+  BTO_webpage()
+  BTO_login(username = USERNAME, password = PASSWORD)
+  BTO_ringing_page()
+}
+
+Refresh_page <- function(){
+remDr$refresh()
+Sys.sleep(2)
+remDr$screenshot(display = TRUE)
 }
 
 BTO_ringing_upload <- function(data, rowStart = 1,display=TRUE){
@@ -58,7 +68,7 @@ BTO_ringing_upload <- function(data, rowStart = 1,display=TRUE){
     
     Ring_no_box <- remDr$findElement(using = 'css selector', ".chosenFieldSetup:nth-child(4) .dataInput")
     Ring_no_box$clearElement()
-    Ring_no_box$sendKeysToElement(list(data$Ring_No[i]))
+    Ring_no_box$sendKeysToElement(list(as.character(data$Ring_No[i])))
     
     ## this is a way of choosing from a dropdown list - use 'option' in the CSS to indicate the value and then 'click' it
     Scheme_box  <- remDr$findElement(using = 'css selector', paste0(".chosenFieldSetup:nth-child(5) .dataInput option[value='",data$Scheme[i],"']"))
@@ -89,8 +99,10 @@ BTO_ringing_upload <- function(data, rowStart = 1,display=TRUE){
     if(!is.na(data$Sexing_Method[i]))Sexing_method_box$sendKeysToElement(list(data$Sexing_Method[i]))
     
   
-    Moult_Code_box  <- remDr$findElement(using = 'css selector', paste0(".chosenFieldSetup:nth-child(30) .dataInput option[value='",data$Moult_Code[i],"']"))
+    Moult_Code_box  <- remDr$findElement(using = 'xpath', paste0("/html/body/div[1]/div/div/div[3]/div[1]/div/div[4]/div/div[4]/div[2]/div[1]/form/table/tbody/tr[2]/td[30]/select"))
     Moult_Code_box$clickElement()
+    if(!is.na(data$Moult_Code[i]))Moult_Code_box$sendKeysToElement(list(data$Moult_Code[i]))
+
     
     Breeding_condition_box <- remDr$findElement(using = 'css selector', ".chosenFieldSetup:nth-child(15) .noRepeat")
     if(!is.na(data$Breeding_Condition[i]))Breeding_condition_box$sendKeysToElement(list(data$Breeding_Condition[i]))
@@ -100,12 +112,18 @@ BTO_ringing_upload <- function(data, rowStart = 1,display=TRUE){
     Visit_date_box$clearElement()
     Visit_date_box$sendKeysToElement(list(data$Visit_Date[i]))
     
+    if(!is.na(data$Date_measured[i])){
+    Measure_date_box <- remDr$findElement(using = 'xpath', '/html/body/div[1]/div/div/div[3]/div[1]/div/div[4]/div/div[4]/div[2]/div[1]/form/table/tbody/tr[2]/td[27]/input')
+    Measure_date_box$clickElement()
+    Measure_date_box$clearElement()
+    Measure_date_box$sendKeysToElement(list(data$Date_measured[i]))
+    }
     
     Capture_time_box <- remDr$findElement(using = 'css selector', ".chosenFieldSetup:nth-child(17) .dataInput")
     Capture_time_box$clickElement()
     if(!is.na(data$Capture_Time[i]))Capture_time_box$sendKeysToElement(list(data$Capture_Time[i], key = "enter"))
     
-    Time_Measured_box <- remDr$findElement(using = 'css selector', ".chosenFieldSetup:nth-child(28) .dataInput")
+    Time_Measured_box <- remDr$findElement(using = 'xpath', '/html/body/div[1]/div/div/div[3]/div[1]/div/div[4]/div/div[4]/div[2]/div[1]/form/table/tbody/tr[2]/td[28]/input')
     Time_Measured_box$clickElement()
     if(!is.na(data$Time_Measured[i]))Time_Measured_box$sendKeysToElement(list(data$Time_Measured[i], key = "enter"))
     
@@ -136,11 +154,13 @@ BTO_ringing_upload <- function(data, rowStart = 1,display=TRUE){
     Weight_box$clearElement()
     if(!is.na(data$Weight[i]))	Weight_box$sendKeysToElement(list(as.character(round(data$Weight[i],1))))
     
-    Fat_box  <- remDr$findElement(using = 'css selector', paste0(".chosenFieldSetup:nth-child(47) .dataInput option[value='",data$Fat[i],"']"))
-    Fat_box$clickElement()
+    if(!is.na(data$Fat[i])){ 
+      Fat_box  <- remDr$findElement(using = 'css selector', paste0(".chosenFieldSetup:nth-child(47) .dataInput option[value='",data$Fat[i],"']"))
+    Fat_box$clickElement()}
     
-    Pectoral_Muscle_box  <- remDr$findElement(using = 'css selector', paste0(".chosenFieldSetup:nth-child(48) .dataInput option[value='",data$Pectoral_Muscle[i],"']"))
-    Pectoral_Muscle_box$clickElement()
+    if(!is.na(data$Pectoral_Muscle[i])){
+      Pectoral_Muscle_box  <- remDr$findElement(using = 'css selector', paste0(".chosenFieldSetup:nth-child(48) .dataInput option[value='",data$Pectoral_Muscle[i],"']"))
+    Pectoral_Muscle_box$clickElement()}
     
     Capture_method_box <- remDr$findElement(using = 'css selector', ".chosenFieldSetup:nth-child(38) .dataInput")
     Capture_method_box$sendKeysToElement(list(data$Capture_Method[i]))
@@ -190,6 +210,22 @@ BTO_ringing_upload <- function(data, rowStart = 1,display=TRUE){
     Nasal_Saddle_box$clearElement()
     if(!is.na(data$Nasal_Saddle[i]))Nasal_Saddle_box$sendKeysToElement(list(data$Nasal_Saddle[i]))
     
+    Head_Bill_box <- remDr$findElement(using = 'xpath', "/html/body/div[1]/div/div/div[3]/div[1]/div/div[4]/div/div[4]/div[2]/div[1]/form/table/tbody/tr[2]/td[57]/input")
+    Head_Bill_box$clearElement()
+    if(!is.na(data$Head_Bill_Length[i])) Head_Bill_box$sendKeysToElement(list(as.character(data$Head_Bill_Length[i])))
+    
+    
+    Tarsus_Length_box <- remDr$findElement(using = 'xpath', "/html/body/div[1]/div/div/div[3]/div[1]/div/div[4]/div/div[4]/div[2]/div[1]/form/table/tbody/tr[2]/td[62]/input")
+    Tarsus_Length_box$clearElement()
+    if(!is.na(data$Tarsus_Length[i])) Tarsus_Length_box$sendKeysToElement(list(as.character(data$Tarsus_Length[i])))
+    
+    if(!is.na(data$Tarsus_Length_Method[i])){
+      TLM_box <- remDr$findElement(using = 'xpath', "/html/body/div[1]/div/div/div[3]/div[1]/div/div[4]/div/div[4]/div[2]/div[1]/form/table/tbody/tr[2]/td[60]/select")
+      TLM_box$sendKeysToElement(list(data$Tarsus_Length_Method[i]))
+    }
+    
+    
+    
     save_button <- remDr$findElement(using = 'css selector', ".col-xs-12:nth-child(2) .btn-primary") 
     save_button$clickElement()
     
@@ -207,9 +243,8 @@ BTO_sightings_upload <- function(data, rowStart=1, display=TRUE){
     remDr$refresh()
     Sys.sleep(3)
     
-    # R changes F to FALSE on upload of data so we change record type to 'F'
     data$Record_Type <- 'F'
-
+    
     # define box and enter data into it
     Record_type_box <- remDr$findElement(using = 'css selector', ".chosenFieldSetup:nth-child(3) .dataInput")
     Record_type_box$sendKeysToElement(list(as.character(data$Record_Type)[i]))
@@ -259,7 +294,7 @@ BTO_sightings_upload <- function(data, rowStart=1, display=TRUE){
     Finding_Circumstances_box  <- remDr$findElement(using = 'css selector', paste0(".chosenFieldSetup:nth-child(37) .dataInput option[value='",data$Finding_Circumstances[i],"']"))
     Finding_Circumstances_box$clickElement()
     
-
+    
     
     Processor_initials_box <- remDr$findElement(using = 'css selector', ".chosenFieldSetup:nth-child(42) .ui-autocomplete-input")
     Processor_initials_box$clearElement()
@@ -319,7 +354,7 @@ BTO_sightings_upload <- function(data, rowStart=1, display=TRUE){
     save_button$getElementAttribute('id')
     save_button$clickElement()
     
-
+    
     Sys.sleep(3)
     if(display) remDr$setWindowSize(width = 1000, height = 2000)
     if(display) remDr$screenshot(display = TRUE)
